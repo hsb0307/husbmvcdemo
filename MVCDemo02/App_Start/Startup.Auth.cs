@@ -47,8 +47,8 @@ namespace MVCDemo02
 
             // Uncomment the following lines to enable logging in with third party login providers
             app.UseMicrosoftAccountAuthentication(
-                clientId: "000000004812022A",
-                clientSecret: "d2pdHGTZvuOs8fzoe2hgdOjUoV7-TtAx");
+                clientId: "000000004017611E",
+                clientSecret: "ZZWAiJv4M09I5a-E0LNFTElaE6Wnlv1I");
 
 
             //app.UseTwitterAuthentication(
