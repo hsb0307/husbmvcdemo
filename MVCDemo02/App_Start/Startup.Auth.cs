@@ -50,6 +50,7 @@ namespace MVCDemo02
                 clientId: "000000004812022A",
                 clientSecret: "d2pdHGTZvuOs8fzoe2hgdOjUoV7-TtAx");
 
+
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
