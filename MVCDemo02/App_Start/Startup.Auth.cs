@@ -5,6 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Microsoft.Owin.Security.QQ;
+
+
 using MVCDemo02.Models;
 
 namespace MVCDemo02
@@ -50,6 +53,8 @@ namespace MVCDemo02
                 clientId: "000000004017611E",
                 clientSecret: "ZZWAiJv4M09I5a-E0LNFTElaE6Wnlv1I");
 
+            app.UseQQConnectAuthentication(
+                appId: "101270486", appSecret: "64389d48959c53bd718118c33ca6c8cb");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
