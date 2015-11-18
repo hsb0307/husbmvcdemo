@@ -18,9 +18,11 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
+                    <button type="submit" class="btn btn-default" id="QQConnect" name="provider" value="QQConnect" title="Log in using your QQ账号 account"><img alt="Connect_logo_4.png" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_4.png"></button>
+
                     @foreach (AuthenticationDescription p in loginProviders) {
                         <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                    }
+                    } 
                 </p>
             </div>
         }
