@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.QQ;
 using Owin.Security.Providers.GitHub;
 
 using MVCDemo02.Models;
+using System.Collections.Generic;
 
 namespace MVCDemo02
 {
@@ -57,9 +58,43 @@ namespace MVCDemo02
             app.UseQQConnectAuthentication(
                 appId: "101270486", appSecret: "64389d48959c53bd718118c33ca6c8cb");
 
-            app.UseGitHubAuthentication(
-                clientId: "232ffa8d82ab115fb94b",
-                clientSecret: "ea702bed4d519295e166bb9dda2fcebed441d546");
+            //app.UseGitHubAuthentication(
+            //    clientId: "232ffa8d82ab115fb94b",
+            //    clientSecret: "ea702bed4d519295e166bb9dda2fcebed441d546");
+            var options = new GitHubAuthenticationOptions
+            {
+                ClientId = "232ffa8d82ab115fb94b",
+                ClientSecret = "ea702bed4d519295e166bb9dda2fcebed441d546",
+                CallbackPath = new PathString("/oauth-redirect/github"),
+                Provider = new GitHubAuthenticationProvider
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        // Retrieve the OAuth access token to store for subsequent API calls
+                        string accessToken = context.AccessToken;
+
+                        // Retrieve the username
+                        string gitHubUserName = context.UserName;
+
+                        // Retrieve the user's email address
+                        string gitHubEmailAddress = context.Email;
+
+                        // You can even retrieve the full JSON-serialized user
+                        var serializedUser = context.User;
+
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("GitHubAccessToken", context.AccessToken));
+
+                    }
+                }
+            };
+            options.Scope.Add("user");
+            options.Scope.Add("repo");
+            options.Scope.Add("public_repo");
+            options.SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie;
+
+            app.UseGitHubAuthentication(options);
+
+
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");

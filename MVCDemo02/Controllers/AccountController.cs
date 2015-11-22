@@ -317,6 +317,32 @@ namespace MVCDemo02.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
+        private async Task StoreAuthTokenClaims(ApplicationUser user)
+        {
+            // Get the claims identity
+            ClaimsIdentity claimsIdentity =
+              await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+
+            if (claimsIdentity != null)
+            {
+                // Retrieve the existing claims
+                var currentClaims = await UserManager.GetClaimsAsync(user.Id);
+
+                // Get the list of access token related claims from the identity
+                var tokenClaims = claimsIdentity.Claims.Where(c => c.Type == "GitHubAccessToken");
+
+                // Save the access token related claims
+                foreach (var tokenClaim in tokenClaims)
+                {
+                    if (!currentClaims.Contains(tokenClaim))
+                    {
+                        await UserManager.AddClaimAsync(user.Id, tokenClaim);
+                    }
+                }
+            }
+        }
+
+
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
@@ -328,11 +354,19 @@ namespace MVCDemo02.Controllers
                 return RedirectToAction("Login");
             }
 
+            var user = await UserManager.FindAsync(loginInfo.Login);
+            if(user != null)
+            {
+                await StoreAuthTokenClaims(user);
+            }
+
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -374,6 +408,8 @@ namespace MVCDemo02.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        await StoreAuthTokenClaims(user);
+
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
