@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using Microsoft.Owin.Security.QQ;
 
+using Owin.Security.Providers.GitHub;
 
 using MVCDemo02.Models;
 
@@ -56,6 +57,9 @@ namespace MVCDemo02
             app.UseQQConnectAuthentication(
                 appId: "101270486", appSecret: "64389d48959c53bd718118c33ca6c8cb");
 
+            app.UseGitHubAuthentication(
+                clientId: "232ffa8d82ab115fb94b",
+                clientSecret: "ea702bed4d519295e166bb9dda2fcebed441d546");
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");

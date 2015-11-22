@@ -47,6 +47,10 @@
       <HintPath>..\packages\Cmj.Owin.Security.1.0.0\lib\net45\Cmj.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="KatanaContrib.Security.Github, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\KatanaContrib.Security.Github.1.0.0\lib\net45\KatanaContrib.Security.Github.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin.Security.QQ, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.QQ.0.1.2\lib\Microsoft.Owin.Security.QQ.dll</HintPath>
@@ -70,6 +74,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin.Security.Providers, Version=1.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.Security.Providers.1.25\lib\net45\Owin.Security.Providers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin.Security.Providers.Weixin, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
