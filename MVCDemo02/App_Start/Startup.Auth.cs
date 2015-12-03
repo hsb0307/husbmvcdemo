@@ -58,6 +58,8 @@ namespace MVCDemo02
             app.UseQQConnectAuthentication(
                 appId: "101270486", appSecret: "64389d48959c53bd718118c33ca6c8cb");
 
+            app.UseSinaAuthentication("1312244040", "f62c6ccb6395427926a4e7e8abdcfc04");
+
             //app.UseGitHubAuthentication(
             //    clientId: "232ffa8d82ab115fb94b",
             //    clientSecret: "ea702bed4d519295e166bb9dda2fcebed441d546");
